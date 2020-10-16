@@ -717,7 +717,7 @@ def main():
             nb_tr_examples = 0
             nb_tr_steps = 0
 
-            for step, batch in enumerate(tqdm(train_dataloader, desc="Iteration", total=5)):
+            for step, batch in enumerate(train_dataloader):
                 batch = tuple(t.to(device) for t in batch)
                 input_ids, input_len, label_ids = batch
 
@@ -772,7 +772,7 @@ def main():
             dev_loss_slot, dev_acc_slot = None, None
             nb_dev_examples, nb_dev_steps = 0, 0
 
-            for step, batch in enumerate(tqdm(dev_dataloader, desc="Validation", total=5)):
+            for step, batch in enumerate(dev_dataloader):
                 batch = tuple(t.to(device) for t in batch)
                 input_ids, input_len, label_ids = batch
                 if input_ids.dim() == 2:
