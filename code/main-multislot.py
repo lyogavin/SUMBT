@@ -986,7 +986,7 @@ def eval_all_accs(pred_slot, labels, accuracies):
         num_turn = torch.sum(_labels[:, :, 0].view(-1) > -1, 0).float()
         num_data = torch.sum(_labels > -1).float()
         # joint accuracy
-        joint_acc = sum(torch.sum(accuracy, 1) / slot_dim).float()
+        joint_acc = sum(torch.sum(accuracy, 1) // slot_dim).float()
         # slot accuracy
         slot_acc = torch.sum(accuracy).float()
         return joint_acc, slot_acc, num_turn, num_data
