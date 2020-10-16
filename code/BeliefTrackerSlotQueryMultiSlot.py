@@ -11,6 +11,12 @@ from pytorch_pretrained_bert.modeling import BertModel
 from pytorch_pretrained_bert.modeling import BertPreTrainedModel
 
 class BertForUtteranceEncoding(BertPreTrainedModel):
+    def __init__(self, config, *model_args, **model_kwargs):
+        super(BertForUtteranceEncoding, self).__init__(config, *model_args, **model_kwargs)
+
+        self.config = config
+        self.bert = BertModel(config)
+
     def __init__(self, config):
         super(BertForUtteranceEncoding, self).__init__(config)
 
