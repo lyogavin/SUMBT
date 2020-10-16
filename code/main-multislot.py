@@ -559,9 +559,9 @@ def main():
 
     # tokenizer
     vocab_dir = os.path.join(args.bert_dir, '%s-vocab.txt' % args.bert_model)
-    if not os.path.exists(vocab_dir):
-        raise ValueError("Can't find %s " % vocab_dir)
-    tokenizer = BertTokenizer.from_pretrained(vocab_dir, do_lower_case=args.do_lower_case)
+    #if not os.path.exists(vocab_dir):
+    #    raise ValueError("Can't find %s " % vocab_dir)
+    tokenizer = BertTokenizer.from_pretrained(args.bert_model, do_lower_case=args.do_lower_case)
 
     num_train_steps = None
     accumulation = False

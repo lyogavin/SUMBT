@@ -29,7 +29,8 @@ class BeliefTracker(nn.Module):
 
         ### Utterance Encoder
         self.utterance_encoder = BertForUtteranceEncoding.from_pretrained(
-            os.path.join(args.bert_dir, 'bert-base-uncased.model')
+            'bert-base-uncased'
+            #os.path.join(args.bert_dir, 'bert-base-uncased.model')
         )
 
         self.bert_output_dim = self.utterance_encoder.config.hidden_size
@@ -38,7 +39,8 @@ class BeliefTracker(nn.Module):
         ### Label Encoder
         if args.task_name.find("label-embedding") != -1:
             self.label_encoder = BertForLabelEncoding.from_pretrained(
-                os.path.join(args.bert_dir, 'bert-base-uncased.model'),
+                'bert-base-uncased',
+                #os.path.join(args.bert_dir, 'bert-base-uncased.model'),
                 trainable=args.set_label_encoder_trainable
             )
         else:

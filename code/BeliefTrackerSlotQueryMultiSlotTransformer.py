@@ -179,7 +179,8 @@ class BeliefTracker(nn.Module):
 
         ### Utterance Encoder
         self.utterance_encoder = BertForUtteranceEncoding.from_pretrained(
-            os.path.join(args.bert_dir, 'bert-base-uncased.model')
+            'bert-base-uncased'
+            #os.path.join(args.bert_dir, 'bert-base-uncased.model')
         )
         self.bert_output_dim = self.utterance_encoder.config.hidden_size
         self.hidden_dropout_prob = self.utterance_encoder.config.hidden_dropout_prob
@@ -188,8 +189,7 @@ class BeliefTracker(nn.Module):
                 p.requires_grad = False
 
         ### slot, slot-value Encoder (not trainable)
-        self.sv_encoder = BertForUtteranceEncoding.from_pretrained(
-                os.path.join(args.bert_dir, 'bert-base-uncased.model'))
+        self.sv_encoder = BertForUtteranceEncoding.from_pretrained('bert-base-uncased')
         for p in self.sv_encoder.bert.parameters():
             p.requires_grad = False
 
@@ -323,7 +323,7 @@ class BeliefTracker(nn.Module):
                 _dist = -_dist
             _, pred = torch.max(_dist, -1)
             pred_slot.append(pred.view(ds, ts, 1))
-            output.append(_dist)
+  a          output.append(_dist)
 
             if labels is not None:
                 _loss = self.nll(_dist.view(ds*ts, -1), labels[:,:,s].view(-1))
