@@ -279,7 +279,7 @@ class BeliefTracker(nn.Module):
         accuracy = (pred_slot == labels).view(-1, slot_dim)
         acc_slot = torch.sum(accuracy,0).float() \
                    / torch.sum(labels.view(-1, slot_dim) > -1, 0).float()
-        acc = sum(torch.sum(accuracy, 1) / slot_dim).float() \
+        acc = sum(torch.sum(accuracy, 1) // slot_dim).float() \
               / torch.sum(labels[:,:,0].view(-1) > -1, 0).float() # joint accuracy
 
         if n_gpu == 1:
